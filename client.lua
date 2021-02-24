@@ -19,7 +19,7 @@ end, false)
 
 function EnableShield()
     shieldActive = true
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     local pedPos = GetEntityCoords(ped, false)
     
     RequestAnimDict(animDict)
@@ -51,7 +51,7 @@ function EnableShield()
 end
 
 function DisableShield()
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     DeleteEntity(shieldEntity)
     ClearPedTasksImmediately(ped)
     SetWeaponAnimationOverride(ped, GetHashKey("Default"))
@@ -67,7 +67,7 @@ end
 Citizen.CreateThread(function()
     while true do
         if shieldActive then
-            local ped = GetPlayerPed(-1)
+            local ped = PlayerPedId()
             if not IsEntityPlayingAnim(ped, animDict, animName, 1) then
                 RequestAnimDict(animDict)
                 while not HasAnimDictLoaded(animDict) do
